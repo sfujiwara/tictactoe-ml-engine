@@ -1,3 +1,5 @@
+# TicTacToe with TensorFlow and Cloud ML Engine
+
 ## バケットの作成
 
 ```bash
@@ -6,13 +8,26 @@ gsutil mb -l us-central1 "gs://${PROJECT_ID}-ml"
 gsutil mb -l us-central1 "gs://${PROJECT_ID}-ml-staging"
 ```
 
+## リポジトリのクローン
+
+```bash
+git clone https://github.com/sfujiwara/tictactoe-ml-engine.git
+cd tictactoe-ml-engine
+```
+
+## データを Cloud Storage にコピー
+
+```bash
+PROJECT_ID=`gcloud config list project --format "value(core.project)"`
+gsutil cp data/tictactoe.csv gs://${PROJECT_ID}-ml/data/
+```
+
 ## Cloud ML Engine にジョブを投げる
 
 ```bash
-JOB_NAME="tictactoe`date '+%Y%m%d%H%M%S'`"
 PROJECT_ID=`gcloud config list project --format "value(core.project)"`
+JOB_NAME="tictactoe`date '+%Y%m%d%H%M%S'`"
 CSV_FILE="gs://${PROJECT_ID}-ml/data/tictactoe.csv"
-gsutil cp data/tictactoe.csv gs://${PROJECT_ID}-ml/data/
 ```
 
 ```bash
